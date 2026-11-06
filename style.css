@@ -1,0 +1,355 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #071b19;
+    color: #f5f1df;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+
+header {
+    text-align: center;
+    padding: 35px 20px 25px;
+    border-bottom: 1px solid #c5aa6a44;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    letter-spacing: 12px;
+    color: #e8d49b;
+}
+
+.subtitle {
+    font-size: 9px;
+    letter-spacing: 5px;
+    margin-top: 8px;
+    color: #b7c8bd;
+}
+
+nav {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+nav a {
+    color: #e8e3d2;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #e8d49b;
+    text-shadow: 0 0 15px #e8d49b;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 570px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background:
+        radial-gradient(ellipse at center, #234b3b 0%, #0b2823 48%, #071b19 100%);
+    position: relative;
+}
+
+.small-title {
+    color: #d8bd7c;
+    font-size: 10px;
+    letter-spacing: 5px;
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(65px, 10vw, 115px);
+    line-height: 0.95;
+    margin: 30px 0;
+    font-weight: 400;
+}
+
+.hero h1 span {
+    color: #e4cd91;
+    font-style: italic;
+}
+
+.intro {
+    max-width: 430px;
+    line-height: 2;
+    color: #c3d0c8;
+    font-size: 13px;
+}
+
+.main-button {
+    margin-top: 35px;
+    padding: 16px 30px;
+    border: 1px solid #d9c28c;
+    color: #e8d49b;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-size: 10px;
+    transition: 0.4s;
+}
+
+.main-button:hover {
+    background: #d9c28c;
+    color: #071b19;
+    box-shadow: 0 0 30px #d9c28c55;
+}
+
+.decorations {
+    margin-top: 65px;
+    color: #d9c28c;
+    opacity: 0.7;
+    letter-spacing: 4px;
+}
+
+/* FACTS */
+
+.facts {
+    padding: 110px 8%;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 400;
+    margin: 18px 0 50px;
+}
+
+.fact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.fact-card {
+    background: linear-gradient(145deg, #16352c, #0c2521);
+    border: 1px solid #c5aa6a33;
+    padding: 35px 23px;
+    text-align: left;
+    transition: 0.4s;
+}
+
+.fact-card:hover {
+    transform: translateY(-10px);
+    border-color: #d9c28c;
+    box-shadow: 0 15px 40px #0005;
+}
+
+.fact-card span {
+    font-size: 38px;
+}
+
+.fact-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    color: #e8d49b;
+    margin: 22px 0 12px;
+}
+
+.fact-card p {
+    color: #b9c9bf;
+    font-size: 12px;
+    line-height: 1.9;
+    min-height: 100px;
+}
+
+.fact-card small {
+    display: block;
+    color: #c5aa6a;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+/* MAGIC */
+
+.magic {
+    text-align: center;
+    padding: 100px 20px;
+    background: #102b25;
+}
+
+.magic-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 60px 0;
+}
+
+.magic-grid div {
+    font-size: 42px;
+    transition: 0.3s;
+}
+
+.magic-grid div:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.magic-grid p {
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    color: #d9c28c;
+}
+
+blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-style: italic;
+    color: #e8d49b;
+    line-height: 1.5;
+}
+
+/* COUNTDOWN */
+
+.countdown {
+    padding: 100px 20px;
+    text-align: center;
+    background: radial-gradient(circle, #244b3a, #071b19);
+}
+
+#timer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(35px, 7vw, 65px);
+    color: #e8d49b;
+    margin: 35px 0 15px;
+}
+
+.countdown > p:last-child {
+    color: #b9c9bf;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* SECRET */
+
+.secret {
+    text-align: center;
+    padding: 100px 20px;
+    background: #102b25;
+}
+
+.secret p {
+    color: #b9c9bf;
+    font-size: 13px;
+    margin: 15px;
+}
+
+#secretButton {
+    background: transparent;
+    color: #e8d49b;
+    border: 1px solid #d9c28c;
+    padding: 17px 30px;
+    margin-top: 25px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+#secretButton:hover {
+    background: #d9c28c;
+    color: #071b19;
+}
+
+#secretText {
+    color: #e8d49b;
+    font-size: 20px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 55px 20px;
+    border-top: 1px solid #c5aa6a33;
+}
+
+footer h2 {
+    color: #e8d49b;
+    margin: 15px 0;
+}
+
+footer p, footer small {
+    color: #a9b9ae;
+    font-size: 9px;
+    letter-spacing: 3px;
+    line-height: 3;
+}
+
+/* SNOW */
+
+.snow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.4;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, white 99%, transparent),
+        radial-gradient(2px 2px at 80px 90px, white 99%, transparent),
+        radial-gradient(3px 3px at 150px 160px, white 99%, transparent),
+        radial-gradient(2px 2px at 220px 50px, white 99%, transparent);
+    background-size: 250px 200px;
+    animation: snowfall 12s linear infinite;
+}
+
+@keyframes snowfall {
+    from { background-position: 0 0; }
+    to { background-position: 100px 400px; }
+}
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+    .fact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    nav {
+        gap: 18px;
+    }
+
+    .fact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facts {
+        padding: 75px 7%;
+    }
+
+    h2 {
+        font-size: 38px;
+    }
+
+    .magic-grid {
+        gap: 30px;
+    }
+}
