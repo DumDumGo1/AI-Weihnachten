@@ -4,151 +4,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEZEMBER| Christmas Magic</title>
+    <title>Magische Weihnachtswelt</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Quicksand:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    <div class="snow"></div>
+<div id="schnee"></div>
+<div id="funken"></div>
 
-    <header>
-        <div class="logo">✧ AJVA ✧</div>
-        <p class="subtitle">THE MAGIC OF CHRISTMAS</p>
+<div class="lichterkette">
+    <span>●</span><span>●</span><span>●</span><span>●</span>
+    <span>●</span><span>●</span><span>●</span><span>●</span>
+    <span>●</span><span>●</span><span>●</span><span>●</span>
+</div>
 
-        <nav>
-            <a href="#start">Home</a>
-            <a href="#fakten">Christmas Facts</a>
-            <a href="#magie">Winter Magic</a>
-            <a href="#geheimnis">Secret</a>
-        </nav>
-    </header>
+<nav class="navigation">
+    <a href="#start" class="logo">✧ WEIHNACHTSZAUBER</a>
+    <div class="nav-links">
+        <a href="#dorf">Weihnachtsdorf</a>
+        <a href="#werkstatt">Wichtelwerkstatt</a>
+        <a href="#kalender">Adventskalender</a>
+        <a href="#spiele">Spiele</a>
+    </div>
+    <div class="geschenk-counter">🎁 <span id="geschenke">0</span></div>
+</nav>
 
-    <main>
+<!-- STARTSEITE -->
 
-        <section class="hero" id="start">
-            <p class="small-title">✦ DECEMBER IS CALLING ✦</p>
+<header class="hero" id="start">
 
-            <h1>Christmas<br><span>Wonderland</span></h1>
+    <div class="hero-stars">✦　✧　⋆　✧　✦　⋆　✧</div>
 
-            <p class="intro">
-                Eine Welt voller Geheimnisse, Lichter,
-                Schneeflocken und Weihnachtsmagie.
+    <div class="hero-text">
+        <p class="kleine-zeile">✧ EIN ORT VOLLER WUNDER ✧</p>
+        <h1>Magische<br><em>Weihnachtswelt</em></h1>
+        <p class="hero-beschreibung">
+            Wo Schneeflocken tanzen, Wichtel heimlich arbeiten
+            und hinter jeder Tür ein kleines Wunder wartet.
+        </p>
+        <a href="#dorf" class="gold-button">DIE WELT ENTDECKEN ↓</a>
+        <p class="hero-hinweis">DIE WEIHNACHTSMAGIE BEGINNT HIER</p>
+    </div>
+
+    <div class="hero-bild">
+        <div class="mond">☾</div>
+        <div class="hero-kranz">✧</div>
+        <div class="hero-baum">🎄</div>
+        <div class="hero-geschenk links">🎁</div>
+        <div class="hero-geschenk rechts">🛷</div>
+        <div class="hero-schnee">❄　✦　❄</div>
+    </div>
+
+    <div class="hero-footer">
+        <span>❄ DIE LUFT RIECHT NACH ZIMT UND PLÄTZCHEN</span>
+        <span>SCROLLE HINAUF INS WEIHNACHTSWUNDER ↓</span>
+    </div>
+</header>
+
+
+<!-- WEIHNACHTSDORF -->
+
+<section class="section dorf" id="dorf">
+
+    <div class="abschnitt-label">01 — EIN KLEINES WUNDERLAND</div>
+    <h2>Das <em>Weihnachtsdorf</em></h2>
+    <p class="untertitel">
+        Hinter den schneebedeckten Bergen liegt ein Dorf,
+        in dem Weihnachten das ganze Jahr über ein bisschen weiterlebt.
+    </p>
+
+    <div class="dorf-landschaft">
+
+        <div class="dorf-himmel">☾　✦　⋆　✧　✦</div>
+
+        <div class="berg berg1"></div>
+        <div class="berg berg2"></div>
+
+        <div class="dorf-haeuser">
+
+            <button class="haus haus1" data-house="bäckerei">
+                <span>🏠</span>
+                <small>PLÄTZCHENBÄCKEREI</small>
+            </button>
+
+            <button class="haus haus2" data-house="post">
+                <span>🏡</span>
+                <small>WEIHNACHTSPOST</small>
+            </button>
+
+            <button class="haus haus3" data-house="spielzeug">
+                <span>🏘️</span>
+                <small>SPIELZEUGLADEN</small>
+            </button>
+
+            <button class="haus haus4" data-house="glocke">
+                <span>⛪</span>
+                <small>GLOCKENTURM</small>
+            </button>
+
+        </div>
+
+        <div class="dorf-baum">🎄</div>
+        <div class="dorf-schnee">❄ ❄ ❄ ❄ ❄ ❄ ❄ ❄ ❄</div>
+
+    </div>
+
+    <p class="dorf-tipp">✧ KLICKE AUF EIN HAUS, UM ES ZU BESUCHEN ✧</p>
+    <div id="hausInfo" class="info-box">Wähle ein Haus im Dorf!</div>
+
+</section>
+
+
+<!-- WICHTELWERKSTATT -->
+
+<section class="section werkstatt" id="werkstatt">
+
+    <div class="abschnitt-label">02 — HINTER DEN KULISSEN</div>
+    <h2>Die <em>Wichtelwerkstatt</em></h2>
+    <p class="untertitel">
+        Hier entstehen die schönsten Geschenke der Welt.
+        Aber die Wichtel haben ziemlich viel zu tun!
+    </p>
+
+    <div class="werkstatt-inhalt">
+
+        <div class="werkstatt-bild">
+            <div class="werkstatt-emoji">🧝</div>
+            <div class="werkstatt-tisch">🎁 🧸 🚂 🪆 🎀</div>
+            <div class="werkstatt-funken">✦ ✧ ✦</div>
+        </div>
+
+        <div class="werkstatt-text">
+            <h3>Ein Blick in die Werkstatt</h3>
+            <p>
+                In der Werkstatt wird gehämmert, genäht, gemalt
+                und verpackt. Tausende kleine Helfer sorgen dafür,
+                dass jedes Geschenk etwas Besonderes wird.
             </p>
 
-            <a href="#fakten" class="main-button">
-                ENTER THE MAGIC ✧
-            </a>
-
-            <div class="decorations">
-                ❄　　　 ✧　　　 🎄　　　 ✧　　　 ❄
-            </div>
-        </section>
-
-
-        <section class="facts" id="fakten">
-
-            <p class="small-title">DID YOU KNOW?</p>
-            <h2>Christmas Facts ✨</h2>
-
-            <div class="fact-grid">
-
-                <article class="fact-card">
-                    <span>🎅</span>
-                    <h3>Santa Claus</h3>
-                    <p>
-                        Die bekannte Figur Santa Claus
-                        wurde unter anderem durch den
-                        niederländischen Sinterklaas inspiriert.
-                    </p>
-                    <small>01 / LEGENDS</small>
-                </article>
-
-                <article class="fact-card">
-                    <span>🎄</span>
-                    <h3>Christmas Trees</h3>
-                    <p>
-                        Der Brauch des geschmückten
-                        Weihnachtsbaums verbreitete sich
-                        besonders aus dem deutschsprachigen Raum.
-                    </p>
-                    <small>02 / TRADITIONS</small>
-                </article>
-
-                <article class="fact-card">
-                    <span>🦌</span>
-                    <h3>Reindeer</h3>
-                    <p>
-                        Rentiere können ihre Augen an
-                        unterschiedliche Lichtverhältnisse
-                        in der Arktis anpassen.
-                    </p>
-                    <small>03 / NATURE</small>
-                </article>
-
-                <article class="fact-card">
-                    <span>❄️</span>
-                    <h3>Snowflakes</h3>
-                    <p>
-                        Eiskristalle haben oft eine
-                        sechseckige Grundstruktur.
-                        Jede Schneeflocke entsteht unter
-                        besonderen Bedingungen.
-                    </p>
-                    <small>04 / SCIENCE</small>
-                </article>
-
-            </div>
-        </section>
-
-
-        <section class="magic" id="magie">
-            <p class="small-title">A LITTLE WINTER MAGIC</p>
-            <h2>The Christmas Atmosphere</h2>
-
-            <div class="magic-grid">
-                <div>🕯️<p>Candlelight</p></div>
-                <div>☕<p>Hot Chocolate</p></div>
-                <div>🎁<p>Surprises</p></div>
-                <div>🌟<p>Golden Lights</p></div>
+            <div class="aufgaben">
+                <div><span>🧸</span> Spielzeuge bauen</div>
+                <div><span>🎀</span> Geschenke verpacken</div>
+                <div><span>📝</span> Wunschzettel sortieren</div>
+                <div><span>🔔</span> Weihnachtsglocken testen</div>
             </div>
 
-            <blockquote>
-                "Christmas isn't a season.<br>
-                It's a feeling."
-            </blockquote>
-        </section>
+            <button class="gold-button" id="wichtelButton">
+                WICHTEL BESUCHEN ✧
+            </button>
+            <p id="wichtelAntwort"></p>
+        </div>
+
+    </div>
+
+</section>
 
 
-        <section class="countdown">
-            <p class="small-title">THE MOST WONDERFUL TIME</p>
-            <h2>Christmas is coming...</h2>
-            <div id="timer">Loading...</div>
-            <p>until December 24th 🎄</p>
-        </section>
+<!-- ADVENTSKALENDER -->
+
+<section class="section kalender" id="kalender">
+
+    <div class="abschnitt-label">03 — 24 KLEINE ÜBERRASCHUNGEN</div>
+    <h2>Der <em>Adventskalender</em></h2>
+    <p class="untertitel">
+        Hinter jedem Türchen verbirgt sich eine kleine
+        Weihnachtsüberraschung. Welches öffnest du?
+    </p>
+
+    <div class="kalender-grid" id="kalenderGrid"></div>
+    <p class="kalender-hinweis">✧ ÖFFNE DIE TÜRCHEN IN BELIEBIGER REIHENFOLGE ✧</p>
+
+</section>
 
 
-        <section class="secret" id="geheimnis">
-            <p class="small-title">TOP SECRET</p>
-            <h2>Something is hidden...</h2>
+<!-- RENTIER AKADEMIE -->
 
-            <p>Manche Geheimnisse findet man nur durch Klicken.</p>
+<section class="section rentier" id="rentier">
 
-            <button id="secretButton">✧ Discover Secret ✧</button>
+    <div class="abschnitt-label">04 — DIE RENTIER-AKADEMIE</div>
+    <h2>Wie gut kennst du <em>Weihnachten?</em></h2>
 
-            <p id="secretText"></p>
-        </section>
+    <div class="quiz-box">
+        <div class="quiz-tier">🦌</div>
+        <p id="quizFortschritt">FRAGE 1 VON 5</p>
+        <h3 id="quizFrage">Welches Tier zieht traditionell den Weihnachtsschlitten?</h3>
+        <div id="quizAntworten" class="quiz-antworten"></div>
+        <p id="quizRueckmeldung"></p>
+        <button id="quizWeiter" class="gold-button" hidden>WEITER →</button>
+    </div>
 
-    </main>
+</section>
 
 
-    <footer>
-        <div>✧ ❄ ✧ ❄ ✧</div>
-        <h2>AJVA</h2>
-        <p>MADE WITH A LITTLE CHRISTMAS MAGIC</p>
-        <small>© 2026 AJVA CHRISTMAS</small>
-    </footer>
+<!-- SPIELE -->
 
-    <script src="script.js"></script>
+<section class="section spiele" id="spiele">
+
+    <div class="abschnitt-label">05 — SPIELEN UND SPASS HABEN</div>
+    <h2>Die <em>Weihnachtsspiele</em></h2>
+    <p class="untertitel">Ein bisschen Weihnachtszauber und eine kleine Herausforderung!</p>
+
+    <div class="spiele-grid">
+
+        <div class="spielkarte">
+            <div class="spiel-symbol">❄️</div>
+            <h3>Schneeflocken-Sammler</h3>
+            <p>Fange so viele Schneeflocken wie möglich in 20 Sekunden!</p>
+            <button class="gold-button" id="schneeSpiel">SPIEL STARTEN</button>
+            <div id="schneeSpielFeld">
+                <p id="schneePunkte">Punkte: 0</p>
+                <p id="schneeZeit">Zeit: 20</p>
+                <div id="schneeZiel"></div>
+            </div>
+        </div>
+
+        <div class="spielkarte">
+            <div class="spiel-symbol">🎁</div>
+            <h3>Das Geschenk-Rätsel</h3>
+            <p>Ein Geschenk ist besonders. Finde heraus, welches es ist!</p>
+            <button class="gold-button" id="geschenkSpiel">RÄTSEL STARTEN</button>
+            <div id="geschenkRaetsel"></div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GEHEIMNISWALD -->
+
+<section class="section geheimwald" id="wald">
+
+    <div class="abschnitt-label">06 — EIN GEHEIMNISVOLLER ORT</div>
+    <h2>Der <em>Geheimniswald</em></h2>
+
+    <p class="untertitel">
+        Zwischen uralten Tannen verstecken sich kleine Geheimnisse.
+        Manche sind leicht zu finden. Andere warten auf dich.
+    </p>
+
+    <div class="wald-bild">
+        <div class="wald-baeume">🌲　🌲　🌲　🌲　🌲</div>
+        <div class="wald-mitte">
+            <span>✧</span>
+            <button id="waldGeheimnis">🔔</button>
+            <span>✧</span>
+        </div>
+        <p>FINDE DAS GEHEIMNIS DES WALDES</p>
+    </div>
+
+    <div id="waldAntwort"></div>
+
+</section>
+
+
+<!-- WEIHNACHTSWÜNSCHE -->
+
+<section class="section wuensche">
+
+    <div class="abschnitt-label">07 — EIN WUNSCH FÜR DICH</div>
+    <h2>Dein <em>Weihnachtswunsch</em></h2>
+
+    <p class="untertitel">
+        Manchmal ist ein kleiner Wunsch schon ein grosses Wunder.
+    </p>
+
+    <div class="wunsch-box">
+        <div class="wunsch-stern">⭐</div>
+        <h3>Was wünschst du dir?</h3>
+        <input id="wunschInput" placeholder="Mein Weihnachtswunsch ist ...">
+        <button class="gold-button" id="wunschButton">WUNSCH VERSCHICKEN ✧</button>
+        <p id="wunschAntwort"></p>
+    </div>
+
+</section>
+
+
+<footer>
+    <div class="footer-stern">✧</div>
+    <h2>MAGISCHE WEIHNACHTSWELT</h2>
+    <p>Ein bisschen Zauber steckt in jedem Winter.</p>
+    <div class="footer-links">
+        <a href="#start">STARTSEITE</a>
+        <a href="#dorf">WEIHNACHTSDORF</a>
+        <a href="#kalender">ADVENTSKALENDER</a>
+    </div>
+    <small>MIT GANZ VIEL WEIHNACHTSZAUBER GEMACHT ✧</small>
+</footer>
+
+
+<!-- POPUP -->
+
+<div class="popup" id="popup">
+    <div class="popup-inhalt">
+        <button id="popupSchliessen">✕</button>
+        <div id="popupSymbol">🎄</div>
+        <h2 id="popupTitel">Weihnachtszauber!</h2>
+        <p id="popupText"></p>
+        <button class="gold-button" id="popupOkay">WUNDERBAR!</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
