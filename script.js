@@ -1,526 +1,492 @@
 
-/* =====================================
-   MAGISCHE WEIHNACHTSWELT
-   INTERAKTIVES JAVASCRIPT
-===================================== */
-
-
-/* POPUP */
-
-const popup = document.getElementById("popup");
-
-function zeigePopup(symbol, titel, text) {
-    document.getElementById("popupSymbol").textContent = symbol;
-    document.getElementById("popupTitel").textContent = titel;
-    document.getElementById("popupText").textContent = text;
-    popup.classList.add("aktiv");
-}
-
-function popupSchliessen() {
-    popup.classList.remove("aktiv");
-}
-
-document.getElementById("popupSchliessen").addEventListener("click", popupSchliessen);
-document.getElementById("popupOkay").addEventListener("click", popupSchliessen);
-
-popup.addEventListener("click", (e) => {
-    if (e.target === popup) popupSchliessen();
-});
-
-
-/* SCHNEE */
-
-const schnee = document.getElementById("schnee");
-
-function schneeflockeErstellen() {
-    const flocke = document.createElement("span");
-    flocke.className = "snowflake";
-    flocke.textContent = ["❄", "✧", "·", "❅"][Math.floor(Math.random() * 4)];
-
-    flocke.style.left = Math.random() * 100 + "%";
-    flocke.style.fontSize = (8 + Math.random() * 15) + "px";
-    flocke.style.animationDuration = (5 + Math.random() * 8) + "s";
-
-    schnee.appendChild(flocke);
-
-    setTimeout(() => flocke.remove(), 14000);
-}
-
-setInterval(schneeflockeErstellen, 180);
-
-
-/* KLEINE FUNKEN BEI KLICKS */
-
-document.addEventListener("click", (e) => {
-    for (let i = 0; i < 5; i++) {
-        const funke = document.createElement("span");
-        funke.className = "spark";
-        funke.textContent = ["✦", "✧", "⋆"][Math.floor(Math.random() * 3)];
-
-        funke.style.left = (e.clientX + Math.random() * 35 - 17) + "px";
-        funke.style.top = (e.clientY + Math.random() * 35 - 17) + "px";
-
-        document.body.appendChild(funke);
-
-        setTimeout(() => funke.remove(), 900);
+const recipes = [
+    {
+        id: "mailaenderli",
+        name: "Mailänderli",
+        emoji: "⭐",
+        category: "klassiker",
+        categoryName: "Schweizer Klassiker",
+        description: "Goldgelbe Butterguetzli mit einem feinen Hauch Zitrone.",
+        time: "30 Min. + Kühlzeit",
+        temperature: "200 °C",
+        baking: "9–11 Min.",
+        amount: "ca. 40–50 Stück",
+        ingredients: [
+            "250 g weiche Butter",
+            "250 g Zucker",
+            "1 Prise Salz",
+            "1 Bio-Zitrone (abgeriebene Schale)",
+            "2 Eier",
+            "500 g Mehl",
+            "1 Eigelb zum Bestreichen"
+        ],
+        steps: [
+            "Butter in einer Schüssel cremig rühren.",
+            "Zucker, Salz, Zitronenschale und Eier dazugeben und weiterrühren, bis die Masse heller wird.",
+            "Mehl beigeben und alles kurz zu einem Teig zusammenfügen. Nicht lange kneten.",
+            "Teig zugedeckt mindestens 1 Stunde im Kühlschrank kühl stellen.",
+            "Backofen auf 200 °C Ober-/Unterhitze vorheizen.",
+            "Teig auf wenig Mehl etwa 7–10 mm dick auswallen und Formen ausstechen.",
+            "Guetzli auf ein mit Backpapier belegtes Blech legen und mit Eigelb bestreichen.",
+            "In der Ofenmitte 9–11 Minuten backen, bis die Ränder leicht goldgelb sind."
+        ],
+        note: "Der Teig lässt sich leichter auswallen, wenn er gut gekühlt ist. Die Mailänderli sollten nicht zu dunkel werden."
+    },
+    {
+        id: "spitzbuben",
+        name: "Spitzbuben",
+        emoji: "❤️",
+        category: "klassiker",
+        categoryName: "Schweizer Klassiker",
+        description: "Zarte Butterguetzli mit fruchtiger Konfitüre dazwischen.",
+        time: "45 Min. + Kühlzeit",
+        temperature: "200 °C",
+        baking: "6–8 Min.",
+        amount: "ca. 25–30 Stück",
+        ingredients: [
+            "250 g weiche Butter",
+            "125 g Puderzucker",
+            "2 TL Vanillezucker",
+            "1 Prise Salz",
+            "1 Eiweiss",
+            "350 g Mehl",
+            "ca. 150 g Johannisbeergelee oder Himbeerkonfitüre",
+            "Etwas Puderzucker zum Bestäuben"
+        ],
+        steps: [
+            "Butter cremig rühren.",
+            "Puderzucker, Vanillezucker, Salz und Eiweiss dazugeben und rühren, bis die Masse heller wird.",
+            "Mehl beigeben und kurz zu einem Teig zusammenfügen.",
+            "Teig in Folie wickeln und 1 Stunde kühl stellen.",
+            "Backofen auf 200 °C Ober-/Unterhitze vorheizen.",
+            "Teig auf wenig Mehl etwa 2–3 mm dick auswallen.",
+            "Gleich viele Böden und Deckel ausstechen. In die Deckel ein kleines Loch stechen.",
+            "Guetzli auf Backpapier legen und nochmals etwa 15 Minuten kühl stellen.",
+            "In der Ofenmitte 6–8 Minuten backen. Sie sollen hell bleiben.",
+            "Abkühlen lassen. Gelee leicht erwärmen, auf die Böden streichen und Deckel daraufsetzen.",
+            "Mit Puderzucker bestäuben."
+        ],
+        note: "Die Spitzbuben erst zusammensetzen, wenn sie vollständig ausgekühlt sind. So zerbrechen sie weniger leicht."
+    },
+    {
+        id: "zimtsterne",
+        name: "Zimtsterne",
+        emoji: "🌟",
+        category: "nuss",
+        categoryName: "Nuss & Gewürze",
+        description: "Weihnachtliche Sterne aus Mandeln mit weisser Glasur.",
+        time: "45 Min. + Trocknungszeit",
+        temperature: "150 °C",
+        baking: "ca. 5 Min.",
+        amount: "ca. 35–45 Stück",
+        ingredients: [
+            "3 Eiweiss",
+            "1 Prise Salz",
+            "250 g Puderzucker",
+            "1½ EL Zimt",
+            "350 g gemahlene Mandeln",
+            "½ EL Zitronensaft"
+        ],
+        steps: [
+            "Eiweiss mit Salz steif schlagen.",
+            "Puderzucker nach und nach dazugeben und weiterschlagen, bis eine glänzende Masse entsteht.",
+            "Etwa 1 dl der Masse für die Glasur beiseitestellen.",
+            "Zimt, Mandeln und Zitronensaft zur restlichen Masse geben und zu einem Teig zusammenfügen.",
+            "Teig auf wenig Zucker etwa 7–10 mm dick auswallen.",
+            "Sterne ausstechen und auf Backpapier legen.",
+            "Die Sterne mit der beiseitegestellten Eiweissmasse bestreichen.",
+            "Mehrere Stunden oder über Nacht bei Raumtemperatur trocknen lassen.",
+            "Im vorgeheizten Ofen bei 150 °C Ober-/Unterhitze etwa 5 Minuten backen. Die Glasur soll hell bleiben."
+        ],
+        note: "Zimtsterne brauchen Zeit zum Trocknen. Plane diesen Schritt unbedingt ein. Die Backzeit ist kurz: Lieber früh kontrollieren!"
+    },
+    {
+        id: "brunsli",
+        name: "Basler Brunsli",
+        emoji: "🍫",
+        category: "schokolade",
+        categoryName: "Schokolade",
+        description: "Schokoladige Mandelguetzli mit einer leicht knusprigen Oberfläche.",
+        time: "30 Min. + Kühlzeit",
+        temperature: "200 °C",
+        baking: "5–7 Min.",
+        amount: "ca. 35 Stück",
+        ingredients: [
+            "250 g gemahlene Mandeln",
+            "200 g Zucker",
+            "2 EL Kakaopulver",
+            "100 g dunkle Schokolade, fein gerieben",
+            "2 Eiweiss",
+            "1 Prise Salz",
+            "1 TL Zimt",
+            "1–2 EL Kirsch (optional)",
+            "Etwas Zucker zum Auswallen"
+        ],
+        steps: [
+            "Mandeln, Zucker, Kakao, geriebene Schokolade und Zimt mischen.",
+            "Eiweiss mit Salz leicht schaumig schlagen, nicht vollständig steif.",
+            "Eiweiss und nach Wunsch Kirsch zur Mandelmischung geben.",
+            "Alles zu einem zusammenhängenden Teig vermengen.",
+            "Teig zugedeckt etwa 30 Minuten kühl stellen.",
+            "Backofen auf 200 °C Ober-/Unterhitze vorheizen.",
+            "Teig auf Zucker etwa 1 cm dick auswallen und Formen ausstechen.",
+            "Auf Backpapier legen und in der Ofenmitte etwa 5–7 Minuten backen.",
+            "Auf dem Blech auskühlen lassen. Brunsli werden beim Abkühlen fester."
+        ],
+        note: "Brunsli sollen innen noch etwas weich sein. Nicht zu lange backen! Der Kirsch ist optional und kann weggelassen werden."
+    },
+    {
+        id: "vanillekipferl",
+        name: "Vanillekipferl",
+        emoji: "🌙",
+        category: "nuss",
+        categoryName: "Nuss & Gewürze",
+        description: "Zarte Halbmonde mit feinem Vanilleduft.",
+        time: "40 Min. + Kühlzeit",
+        temperature: "175 °C",
+        baking: "10–12 Min.",
+        amount: "ca. 35–40 Stück",
+        ingredients: [
+            "250 g kalte Butter",
+            "100 g Zucker",
+            "350 g Mehl",
+            "100 g gemahlene Mandeln",
+            "1 Päckchen Vanillezucker",
+            "1 Prise Salz",
+            "50 g Puderzucker zum Wenden",
+            "1 Päckchen Vanillezucker zum Wenden"
+        ],
+        steps: [
+            "Mehl, Zucker, gemahlene Mandeln, Vanillezucker und Salz mischen.",
+            "Kalte Butter in kleinen Stücken dazugeben.",
+            "Alles rasch zu einem glatten Teig zusammenfügen.",
+            "Teig in Folie wickeln und mindestens 1 Stunde kühl stellen.",
+            "Backofen auf 175 °C Ober-/Unterhitze vorheizen.",
+            "Aus dem Teig kleine Rollen formen, Stücke abschneiden und zu Kipferln biegen.",
+            "Auf ein Backblech mit Backpapier legen.",
+            "In der Ofenmitte 10–12 Minuten backen. Die Spitzen dürfen leicht Farbe bekommen.",
+            "Puderzucker und Vanillezucker mischen. Die noch warmen Kipferl vorsichtig darin wenden."
+        ],
+        note: "Die Kipferl sind direkt nach dem Backen sehr zerbrechlich. Lass sie kurz auf dem Blech liegen, bevor du sie bewegst."
+    },
+    {
+        id: "schoggi",
+        name: "Schoggi-Cookies",
+        emoji: "🍪",
+        category: "schokolade",
+        categoryName: "Schokolade",
+        description: "Aussen leicht knusprig, innen weich mit Schokoladenstückchen.",
+        time: "20 Min.",
+        temperature: "180 °C",
+        baking: "10–12 Min.",
+        amount: "ca. 18 Stück",
+        ingredients: [
+            "125 g weiche Butter",
+            "100 g brauner Zucker",
+            "50 g weisser Zucker",
+            "1 Ei",
+            "1 TL Vanillezucker",
+            "180 g Mehl",
+            "½ TL Backpulver",
+            "1 Prise Salz",
+            "120 g Schokoladenwürfel oder Schokodrops"
+        ],
+        steps: [
+            "Backofen auf 180 °C Ober-/Unterhitze vorheizen.",
+            "Butter mit braunem und weissem Zucker cremig rühren.",
+            "Ei und Vanillezucker unterrühren.",
+            "Mehl, Backpulver und Salz mischen und kurz unterheben.",
+            "Schokoladenstücke unter den Teig mischen.",
+            "Mit zwei Löffeln etwa walnussgrosse Teighäufchen auf ein Backpapier setzen. Viel Abstand lassen.",
+            "Die Häufchen nicht platt drücken. Sie verlaufen beim Backen.",
+            "In der Ofenmitte 10–12 Minuten backen.",
+            "Auf dem Blech etwa 10 Minuten abkühlen lassen."
+        ],
+        note: "Die Cookies sehen in der Mitte direkt nach dem Backen noch weich aus. Beim Abkühlen werden sie fester."
+    },
+    {
+        id: "hafer",
+        name: "Haferflocken-Guetzli",
+        emoji: "🌾",
+        category: "nuss",
+        categoryName: "Nuss & Co.",
+        description: "Knusprige kleine Guetzli mit Haferflocken.",
+        time: "20 Min.",
+        temperature: "180 °C",
+        baking: "12–15 Min.",
+        amount: "ca. 25 Stück",
+        ingredients: [
+            "125 g weiche Butter",
+            "100 g Zucker",
+            "1 Ei",
+            "1 TL Vanillezucker",
+            "100 g zarte Haferflocken",
+            "100 g Mehl",
+            "½ TL Backpulver",
+            "1 Prise Salz"
+        ],
+        steps: [
+            "Backofen auf 180 °C Ober-/Unterhitze vorheizen.",
+            "Butter und Zucker cremig rühren.",
+            "Ei und Vanillezucker dazugeben und gut verrühren.",
+            "Haferflocken, Mehl, Backpulver und Salz mischen.",
+            "Die trockenen Zutaten zur Buttermasse geben und zu einem Teig verrühren.",
+            "Mit zwei Teelöffeln kleine Häufchen auf ein Backblech setzen.",
+            "Etwas Abstand zwischen den Häufchen lassen.",
+            "In der Ofenmitte 12–15 Minuten backen, bis die Ränder goldbraun sind.",
+            "Auf einem Gitter vollständig auskühlen lassen."
+        ],
+        note: "Für eine Variante kannst du eine kleine Handvoll Rosinen oder Schokoladenstückchen in den Teig geben."
+    },
+    {
+        id: "kokos",
+        name: "Kokosmakronen",
+        emoji: "🥥",
+        category: "nuss",
+        categoryName: "Nuss & Co.",
+        description: "Luftige Kokos-Häufchen mit einer leicht goldenen Spitze.",
+        time: "20 Min.",
+        temperature: "160 °C",
+        baking: "12–15 Min.",
+        amount: "ca. 20 Stück",
+        ingredients: [
+            "2 Eiweiss",
+            "100 g Zucker",
+            "150 g Kokosraspel",
+            "1 Prise Salz",
+            "1 TL Zitronensaft",
+            "Optional: 50 g dunkle Schokolade zum Verzieren"
+        ],
+        steps: [
+            "Backofen auf 160 °C Ober-/Unterhitze vorheizen.",
+            "Eiweiss mit Salz steif schlagen.",
+            "Zucker langsam einrieseln lassen und weiterschlagen.",
+            "Kokosraspel und Zitronensaft vorsichtig unterheben.",
+            "Mit zwei Teelöffeln kleine Häufchen auf ein Backblech mit Backpapier setzen.",
+            "In der Ofenmitte 12–15 Minuten backen, bis die Spitzen leicht goldgelb sind.",
+            "Auf dem Blech abkühlen lassen.",
+            "Nach Wunsch geschmolzene Schokolade darüberträufeln."
+        ],
+        note: "Die Masse sollte nicht flüssig sein. Hebe die Kokosraspel vorsichtig unter, damit die Makronen schön luftig bleiben."
     }
-});
+];
+
+let activeFilter = "alle";
+let favorites = [];
+
+const recipeGrid = document.getElementById("recipe-grid");
+const favoriteGrid = document.getElementById("favorite-grid");
+const searchInput = document.getElementById("recipe-search");
+const modal = document.getElementById("recipe-modal");
+const modalContent = document.getElementById("modal-content");
 
 
-/* GESCHENKE */
+// REZEPTKARTEN ERSTELLEN
 
-let geschenke = Number(localStorage.getItem("weihnachtsGeschenke")) || 0;
+function createRecipeCard(recipe) {
+    const isFavorite = favorites.includes(recipe.id);
 
-function aktualisiereGeschenke() {
-    document.getElementById("geschenke").textContent = geschenke;
-    localStorage.setItem("weihnachtsGeschenke", geschenke);
+    return `
+        <article class="recipe-card">
+            <div class="recipe-image">${recipe.emoji}</div>
+
+            <div class="recipe-card-content">
+                <span class="recipe-category">${recipe.categoryName}</span>
+
+                <h3>${recipe.name}</h3>
+
+                <p>${recipe.description}</p>
+
+                <div class="recipe-meta">
+                    <span>⏱ ${recipe.time}</span>
+                    <span>🍪 ${recipe.amount}</span>
+                </div>
+
+                <div class="card-actions">
+                    <button class="open-recipe" data-open="${recipe.id}">
+                        Rezept ansehen →
+                    </button>
+
+                    <button
+                        class="favorite-button ${isFavorite ? "saved" : ""}"
+                        data-favorite="${recipe.id}"
+                        aria-label="Favorit speichern"
+                    >
+                        ${isFavorite ? "♥" : "♡"}
+                    </button>
+                </div>
+            </div>
+        </article>
+    `;
 }
 
-function geschenkSammeln(anzahl = 1) {
-    geschenke += anzahl;
-    aktualisiereGeschenke();
-}
 
-aktualisiereGeschenke();
+// REZEPTE ANZEIGEN
 
+function renderRecipes() {
+    const search = searchInput.value.toLowerCase().trim();
 
-/* WEIHNACHTSDORF */
+    const filtered = recipes.filter(recipe => {
+        const matchesFilter =
+            activeFilter === "alle" ||
+            recipe.category === activeFilter;
 
-const hausInfos = {
-    bäckerei: {
-        symbol: "🍪",
-        titel: "Die Plätzchenbäckerei",
-        text: "Hier werden Zimtsterne, Vanillekipferl und Lebkuchen gebacken. Der Duft ist sogar bis zum Marktplatz zu riechen. Geheimtipp: Die Wichtel verstecken manchmal ein Extra-Plätzchen!"
-    },
+        const matchesSearch =
+            recipe.name.toLowerCase().includes(search) ||
+            recipe.description.toLowerCase().includes(search) ||
+            recipe.ingredients.join(" ").toLowerCase().includes(search);
 
-    post: {
-        symbol: "💌",
-        titel: "Die Weihnachtspost",
-        text: "Tausende Wunschzettel kommen hier an. Die Briefe werden sortiert, gestempelt und an die richtigen Orte gebracht. Ein Brief ist allerdings seit 100 Jahren unterwegs ..."
-    },
-
-    spielzeug: {
-        symbol: "🧸",
-        titel: "Der Spielzeugladen",
-        text: "In diesem Laden gibt es Holzpferde, Puppen, Eisenbahnen und geheimnisvolle Spielzeuge. Angeblich bewegt sich ein Teddybär jede Nacht von selbst!"
-    },
-
-    glocke: {
-        symbol: "🔔",
-        titel: "Der Glockenturm",
-        text: "Die grosse Glocke läutet jeden Abend um Mitternacht. Ihr Klang soll Wünsche erfüllen. Niemand weiss genau, wer sie ursprünglich aufgehängt hat."
-    }
-};
-
-document.querySelectorAll(".haus").forEach(haus => {
-    haus.addEventListener("click", () => {
-        const info = hausInfos[haus.dataset.house];
-
-        document.getElementById("hausInfo").innerHTML =
-            `<strong>${info.symbol} ${info.titel}</strong><br>${info.text}`;
-
-        if (!haus.classList.contains("besucht")) {
-            haus.classList.add("besucht");
-            geschenkSammeln();
-        }
+        return matchesFilter && matchesSearch;
     });
-});
 
+    recipeGrid.innerHTML = filtered.map(createRecipeCard).join("");
 
-/* WICHTEL */
+    document.getElementById("no-results").hidden = filtered.length !== 0;
 
-const wichtelSprueche = [
-    "Pssst! Wir verpacken gerade ein Geschenk für jemanden ganz Besonderen. 🎁",
-    "Ein Wichtel hat gerade 47 Schleifen auf einmal gebunden. Neuer Rekord! 🎀",
-    "Hilfe! Wo ist die Liste mit den Wunschzetteln geblieben? 📝",
-    "Wir haben gerade einen sprechenden Schneemann gebaut. Er erzählt Witze! ⛄",
-    "Ein Rentier hat sich in unserer Werkstatt versteckt. Schon entdeckt? 🦌"
-];
-
-document.getElementById("wichtelButton").addEventListener("click", () => {
-    const spruch = wichtelSprueche[Math.floor(Math.random() * wichtelSprueche.length)];
-
-    document.getElementById("wichtelAntwort").textContent = "🧝 " + spruch;
-    geschenkSammeln();
-});
-
-
-/* ADVENTSKALENDER */
-
-const kalenderGrid = document.getElementById("kalenderGrid");
-
-const adventsUeberraschungen = [
-    "Heute ist ein guter Tag für eine Tasse heisse Schokolade. ☕",
-    "Ein kleiner Stern schickt dir einen Weihnachtsgruss! ⭐",
-    "Zeit für ein paar leckere Weihnachtsplätzchen! 🍪",
-    "Heute darfst du jemandem eine Freude machen. 💌",
-    "Ein Rentier hat dir einen geheimen Gruss geschickt! 🦌",
-    "Vergiss nicht, heute etwas Schönes zu entdecken. ✨",
-    "Ein bisschen Weihnachtsmusik macht den Tag schöner. 🎶",
-    "Heute ist perfekt für einen gemütlichen Filmabend. 🎬",
-    "Ein Wichtel hat ein Geschenk für dich versteckt. 🎁",
-    "Zeit für eine kleine Winterwanderung! ❄️",
-    "Du bist ein wichtiger Teil deiner eigenen Weihnachtsgeschichte. ❤️",
-    "Heute gibt es eine extra Portion Zauber! 🪄",
-    "Ein Stern leuchtet heute besonders hell für dich. 🌟",
-    "Vielleicht ist heute ein guter Tag zum Basteln. ✂️",
-    "Jemand freut sich bestimmt über ein nettes Wort von dir. 💛",
-    "Ein unsichtbarer Wichtel winkt dir zu. 🧝",
-    "Heute darfst du einfach gemütlich sein. 🧣",
-    "Die Weihnachtsbäckerei ist geöffnet! 🍰",
-    "Ein kleines Wunder wartet oft an unerwarteten Orten. ✨",
-    "Noch ein paar Tage bis zum grossen Fest! 🎄",
-    "Heute ist Zeit für einen Wunsch. 🌠",
-    "Der Weihnachtszauber wird immer stärker. 🔔",
-    "Morgen ist ein ganz besonderer Tag! 🎁",
-    "Frohe Weihnachten! Du hast alle 24 Türchen entdeckt! 🎄"
-];
-
-for (let i = 1; i <= 24; i++) {
-    const tuer = document.createElement("button");
-    tuer.className = "tuerchen";
-    tuer.textContent = i;
-
-    tuer.addEventListener("click", () => {
-        if (tuer.classList.contains("offen")) {
-            zeigePopup("🎄", "Dieses Türchen ist schon offen!", "Du hast diese Überraschung bereits entdeckt. Schau dich weiter um!");
-            return;
-        }
-
-        tuer.classList.add("offen");
-        tuer.textContent = ["⭐", "🎁", "❄", "🍪", "🔔"][i % 5];
-
-        zeigePopup("🎄", `Türchen ${i}`, adventsUeberraschungen[i - 1]);
-        geschenkSammeln();
-    });
-
-    kalenderGrid.appendChild(tuer);
+    addCardEvents();
 }
 
 
-/* RENTIER-QUIZ */
+// FAVORITEN ANZEIGEN
 
-const quizFragen = [
-    {
-        frage: "Welches Tier zieht traditionell den Weihnachtsschlitten?",
-        antworten: ["Pferde", "Rentiere", "Pinguine", "Polarfüchse"],
-        richtig: 1
-    },
-    {
-        frage: "Welche Pflanze wird oft zu Weihnachten geschmückt?",
-        antworten: ["Kaktus", "Sonnenblume", "Tannenbaum", "Palme"],
-        richtig: 2
-    },
-    {
-        frage: "Wie heisst die berühmte rote Nase eines Rentiers?",
-        antworten: ["Rudolph", "Robert", "Rudi", "Robin"],
-        richtig: 0
-    },
-    {
-        frage: "Welche Farbe hat der Mantel des Weihnachtsmannes meistens?",
-        antworten: ["Blau", "Grün", "Rot", "Violett"],
-        richtig: 2
-    },
-    {
-        frage: "Was findet man oft unter einem Weihnachtsbaum?",
-        antworten: ["Muscheln", "Geschenke", "Regenschirme", "Schneebälle"],
-        richtig: 1
-    }
-];
+function renderFavorites() {
+    const favoriteRecipes = recipes.filter(recipe =>
+        favorites.includes(recipe.id)
+    );
 
-let quizIndex = 0;
-let quizPunkte = 0;
-let quizBeantwortet = false;
+    favoriteGrid.innerHTML = favoriteRecipes
+        .map(createRecipeCard)
+        .join("");
 
-const quizFrage = document.getElementById("quizFrage");
-const quizAntworten = document.getElementById("quizAntworten");
-const quizRueckmeldung = document.getElementById("quizRueckmeldung");
-const quizWeiter = document.getElementById("quizWeiter");
+    document.getElementById("empty-favorites").hidden =
+        favoriteRecipes.length !== 0;
 
-function quizLaden() {
-    quizBeantwortet = false;
+    document.getElementById("favorite-count").textContent =
+        favorites.length;
 
-    const frage = quizFragen[quizIndex];
+    addCardEvents();
+}
 
-    document.getElementById("quizFortschritt").textContent =
-        `FRAGE ${quizIndex + 1} VON ${quizFragen.length}`;
 
-    quizFrage.textContent = frage.frage;
-    quizAntworten.innerHTML = "";
-    quizRueckmeldung.textContent = "";
-    quizWeiter.hidden = true;
+// KLICK-EVENTS FÜR DIE KARTEN
 
-    frage.antworten.forEach((antwort, index) => {
-        const button = document.createElement("button");
-        button.textContent = antwort;
-
+function addCardEvents() {
+    document.querySelectorAll("[data-open]").forEach(button => {
         button.addEventListener("click", () => {
-            if (quizBeantwortet) return;
-
-            quizBeantwortet = true;
-
-            const alleButtons = quizAntworten.querySelectorAll("button");
-
-            alleButtons.forEach((b, i) => {
-                b.disabled = true;
-
-                if (i === frage.richtig) b.classList.add("richtig");
-                else if (i === index) b.classList.add("falsch");
-            });
-
-            if (index === frage.richtig) {
-                quizPunkte++;
-                quizRueckmeldung.textContent = "Richtig! Du bist ein Weihnachtsprofi! ✨";
-            } else {
-                quizRueckmeldung.textContent =
-                    "Fast! Die richtige Antwort ist: " + frage.antworten[frage.richtig] + ".";
-            }
-
-            quizWeiter.hidden = false;
+            openRecipe(button.dataset.open);
         });
+    });
 
-        quizAntworten.appendChild(button);
+    document.querySelectorAll("[data-favorite]").forEach(button => {
+        button.addEventListener("click", () => {
+            toggleFavorite(button.dataset.favorite);
+        });
     });
 }
 
-quizWeiter.addEventListener("click", () => {
-    quizIndex++;
 
-    if (quizIndex < quizFragen.length) {
-        quizLaden();
+// FAVORITEN UMSCHALTEN
+
+function toggleFavorite(id) {
+    if (favorites.includes(id)) {
+        favorites = favorites.filter(item => item !== id);
     } else {
-        quizFrage.textContent = `Du hast ${quizPunkte} von 5 Punkten erreicht!`;
-        quizAntworten.innerHTML = "";
-        quizRueckmeldung.textContent =
-            quizPunkte === 5
-                ? "Unglaublich! Du bist eine echte Weihnachtslegende! 🏆"
-                : "Toll gemacht! Die Rentier-Akademie gratuliert dir! 🎄";
-
-        quizWeiter.hidden = true;
-
-        if (quizPunkte >= 3) geschenkSammeln(2);
-        quizIndex = -1;
-
-        setTimeout(() => {
-            quizIndex = 0;
-            quizPunkte = 0;
-            quizLaden();
-        }, 4500);
+        favorites.push(id);
     }
-});
 
-quizLaden();
-
-
-/* SCHNEEFLOCKEN-SPIEL */
-
-let schneePunkte = 0;
-let schneeZeit = 20;
-let schneeAktiv = false;
-let schneeIntervall;
-let schneeUhr;
-
-const schneeFeld = document.getElementById("schneeSpielFeld");
-const schneeZiel = document.getElementById("schneeZiel");
-
-document.getElementById("schneeSpiel").addEventListener("click", () => {
-    if (schneeAktiv) return;
-
-    schneeAktiv = true;
-    schneePunkte = 0;
-    schneeZeit = 20;
-
-    schneeFeld.style.display = "block";
-    schneeZiel.innerHTML = "";
-
-    document.getElementById("schneePunkte").textContent = "Punkte: 0";
-    document.getElementById("schneeZeit").textContent = "Zeit: 20";
-
-    schneeIntervall = setInterval(() => {
-        const ziel = document.createElement("button");
-        ziel.className = "fang-schnee";
-        ziel.textContent = ["❄", "❅", "❆"][Math.floor(Math.random() * 3)];
-        ziel.style.left = Math.random() * 85 + "%";
-        ziel.style.animationDuration = "2.5s";
-
-        ziel.addEventListener("click", () => {
-            if (!schneeAktiv) return;
-
-            schneePunkte++;
-            document.getElementById("schneePunkte").textContent =
-                "Punkte: " + schneePunkte;
-
-            ziel.remove();
-        });
-
-        schneeZiel.appendChild(ziel);
-        setTimeout(() => ziel.remove(), 2500);
-    }, 650);
-
-    schneeUhr = setInterval(() => {
-        schneeZeit--;
-
-        document.getElementById("schneeZeit").textContent =
-            "Zeit: " + schneeZeit;
-
-        if (schneeZeit <= 0) {
-            clearInterval(schneeIntervall);
-            clearInterval(schneeUhr);
-
-            schneeAktiv = false;
-            schneeZiel.innerHTML = "";
-
-            document.getElementById("schneeZiel").textContent =
-                `Spiel beendet! Du hast ${schneePunkte} Schneeflocken gesammelt.`;
-
-            if (schneePunkte >= 10) geschenkSammeln(3);
-        }
-    }, 1000);
-});
+    renderRecipes();
+    renderFavorites();
+}
 
 
-/* GESCHENK-RÄTSEL */
+// REZEPT-FENSTER ÖFFNEN
 
-document.getElementById("geschenkSpiel").addEventListener("click", () => {
-    const feld = document.getElementById("geschenkRaetsel");
+function openRecipe(id) {
+    const recipe = recipes.find(item => item.id === id);
 
-    feld.innerHTML = `
-        <p>Welches Geschenk enthält einen goldenen Stern?</p>
-        <div>
-            <button class="raetsel-geschenk" data-gift="false">🎁</button>
-            <button class="raetsel-geschenk" data-gift="true">🎁</button>
-            <button class="raetsel-geschenk" data-gift="false">🎁</button>
+    if (!recipe) return;
+
+    modalContent.innerHTML = `
+        <div class="modal-emoji">${recipe.emoji}</div>
+
+        <span class="recipe-category">${recipe.categoryName}</span>
+
+        <h2>${recipe.name}</h2>
+
+        <p class="modal-description">${recipe.description}</p>
+
+        <div class="modal-facts">
+            <span>⏱ ${recipe.time}</span>
+            <span>🔥 ${recipe.temperature}</span>
+            <span>🍪 ${recipe.amount}</span>
         </div>
-        <p id="raetselAntwort"></p>
+
+        <h3>🧺 Zutaten</h3>
+
+        <ul class="ingredients">
+            ${recipe.ingredients.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+
+        <h3>👩‍🍳 So geht's</h3>
+
+        <ol class="steps">
+            ${recipe.steps.map(step => `<li>${step}</li>`).join("")}
+        </ol>
+
+        <div class="recipe-note">
+            💡 <strong>Backstuben-Tipp:</strong> ${recipe.note}
+            <br><br>
+            <strong>Wichtig:</strong> Die Backzeiten sind Richtwerte.
+            Behalte die Guetzli gegen Ende der Backzeit im Auge.
+        </div>
     `;
 
-    feld.querySelectorAll(".raetsel-geschenk").forEach(button => {
-        button.addEventListener("click", () => {
-            const antwort = document.getElementById("raetselAntwort");
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+}
 
-            if (button.dataset.gift === "true") {
-                antwort.textContent = "Richtig! Du hast den goldenen Stern gefunden! ⭐";
-                geschenkSammeln(2);
-            } else {
-                antwort.textContent = "Leider nicht! Versuch es noch einmal. ✧";
-            }
+
+// REZEPT-FENSTER SCHLIESSEN
+
+function closeRecipe() {
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+}
+
+document.getElementById("modal-close").addEventListener("click", closeRecipe);
+document.getElementById("modal-backdrop").addEventListener("click", closeRecipe);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeRecipe();
+    }
+});
+
+
+// FILTER
+
+document.querySelectorAll(".filter").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => {
+            item.classList.remove("active");
         });
+
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+
+        renderRecipes();
     });
 });
 
 
-/* GEHEIMNISWALD */
+// SUCHE
 
-let waldEntdeckt = false;
-
-document.getElementById("waldGeheimnis").addEventListener("click", () => {
-    const antwort = document.getElementById("waldAntwort");
-
-    if (!waldEntdeckt) {
-        waldEntdeckt = true;
-
-        antwort.innerHTML =
-            "🔔 Du hast die alte Waldglocke gefunden! Sie wurde vor langer Zeit von den Wichteln versteckt. Du erhältst 5 Geschenke!";
-
-        geschenkSammeln(5);
-    } else {
-        antwort.textContent =
-            "Die Waldglocke läutet noch immer. Sie hat dir ihr Geheimnis bereits verraten. ✨";
-    }
-});
+searchInput.addEventListener("input", renderRecipes);
 
 
-/* WEIHNACHTSWUNSCH */
+// START
 
-document.getElementById("wunschButton").addEventListener("click", () => {
-    const input = document.getElementById("wunschInput");
-    const antwort = document.getElementById("wunschAntwort");
-    const wunsch = input.value.trim();
-
-    if (!wunsch) {
-        antwort.textContent = "Schreibe zuerst deinen Wunsch auf. ⭐";
-        return;
-    }
-
-    antwort.textContent =
-        `✨ Dein Wunsch "${wunsch}" wurde an den Weihnachtsstern geschickt. Möge ein bisschen Weihnachtszauber zu dir kommen!`;
-
-    input.value = "";
-});
-
-
-/* GEHEIME EASTER EGGS */
-
-let baumKlicks = 0;
-
-document.querySelector(".hero-baum").addEventListener("click", () => {
-    baumKlicks++;
-
-    if (baumKlicks === 5) {
-        zeigePopup(
-            "🎄",
-            "Der geheime Weihnachtsbaum!",
-            "Du hast den Zauber des Weihnachtsbaums entdeckt! In seinen Zweigen versteckt sich ein winziger Wichtel. Er schenkt dir 3 Geschenke."
-        );
-
-        geschenkSammeln(3);
-        baumKlicks = 0;
-    }
-});
-
-let logoKlicks = 0;
-
-document.querySelector(".logo").addEventListener("click", (e) => {
-    e.preventDefault();
-    logoKlicks++;
-
-    if (logoKlicks === 7) {
-        zeigePopup(
-            "🧝",
-            "Der geheime Eingang!",
-            "Du hast das geheime Zeichen gefunden. Die Wichtel kennen dich jetzt!"
-        );
-
-        geschenkSammeln(2);
-        logoKlicks = 0;
-    }
-});
-
-
-/* KONAMI-ÄHNLICHER GEHEIMCODE */
-
-let geheimCode = [];
-const richtigerCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight"];
-
-document.addEventListener("keydown", (e) => {
-    geheimCode.push(e.key);
-    geheimCode = geheimCode.slice(-6);
-
-    if (JSON.stringify(geheimCode) === JSON.stringify(richtigerCode)) {
-        zeigePopup(
-            "🎅",
-            "Geheimer Weihnachtscode!",
-            "Ho ho ho! Du hast den geheimen Tastencode entdeckt. Der Weihnachtsmann hat eine Überraschung für dich!"
-        );
-
-        geschenkSammeln(5);
-        geheimCode = [];
-    }
-});
-
-
-/* GEHEIME WEIHNACHTSBOTSCHAFT */
-
-let besuche = 0;
-
-document.addEventListener("click", () => {
-    besuche++;
-
-    if (besuche === 30) {
-        zeigePopup(
-            "💌",
-            "Eine kleine Nachricht",
-            "Du hast diese Weihnachtswelt schon oft besucht. Danke, dass du so viel Weihnachtszauber mitbringst!"
-        );
-    }
-});
+renderRecipes();
+renderFavorites();

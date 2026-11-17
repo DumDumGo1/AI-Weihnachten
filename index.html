@@ -4,308 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magische Weihnachtswelt</title>
+    <title>Guetzli-Atelier 🍪</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Quicksand:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="schnee"></div>
-<div id="funken"></div>
+    <header class="topbar">
+        <a href="#" class="logo">🍪 Guetzli-Atelier</a>
+        <nav>
+            <a href="#start">Start</a>
+            <a href="#rezepte">Rezepte</a>
+            <a href="#tipps">Backtipps</a>
+            <a href="#lieblinge">Merkliste <span id="favorite-count">0</span></a>
+        </nav>
+    </header>
 
-<div class="lichterkette">
-    <span>●</span><span>●</span><span>●</span><span>●</span>
-    <span>●</span><span>●</span><span>●</span><span>●</span>
-    <span>●</span><span>●</span><span>●</span><span>●</span>
-</div>
+    <main>
+        <section class="hero" id="start">
+            <div class="hero-content">
+                <span class="eyebrow">DIE KLEINE WELT DES GROSSEN BACKSPASSES</span>
+                <h1>Ein bisschen Mehl.<br>Ganz viel <em>Glück.</em></h1>
+                <p>
+                    Willkommen in deiner Guetzli-Backstube!
+                    Entdecke feine Rezepte, probiere Neues aus
+                    und finde deine nächsten Lieblingsguetzli.
+                </p>
+                <a class="main-button" href="#rezepte">Rezepte entdecken ↓</a>
+                <div class="hero-note">✦ Mit Liebe gebacken schmeckt's am besten.</div>
+            </div>
 
-<nav class="navigation">
-    <a href="#start" class="logo">✧ WEIHNACHTSZAUBER</a>
-    <div class="nav-links">
-        <a href="#dorf">Weihnachtsdorf</a>
-        <a href="#werkstatt">Wichtelwerkstatt</a>
-        <a href="#kalender">Adventskalender</a>
-        <a href="#spiele">Spiele</a>
-    </div>
-    <div class="geschenk-counter">🎁 <span id="geschenke">0</span></div>
-</nav>
+            <div class="hero-art">
+                <div class="cookie-circle">
+                    <span>🍪</span>
+                </div>
+                <span class="floating-cookie cookie-one">🍪</span>
+                <span class="floating-cookie cookie-two">✨</span>
+                <span class="floating-cookie cookie-three">🥛</span>
+                <div class="art-label">FRISCH AUS DEM OFEN</div>
+            </div>
+        </section>
 
-<!-- STARTSEITE -->
+        <section class="intro-strip">
+            <div>🍯 <strong>Gute Zutaten</strong><span>Einfach und lecker</span></div>
+            <div>⏱️ <strong>Klare Anleitung</strong><span>Schritt für Schritt</span></div>
+            <div>🤎 <strong>Für alle Anlässe</strong><span>Von klassisch bis kreativ</span></div>
+        </section>
 
-<header class="hero" id="start">
+        <section class="recipes-section" id="rezepte">
+            <div class="section-heading">
+                <span class="eyebrow">DAS REZEPTREGAL</span>
+                <h2>Was darf's heute sein?</h2>
+                <p>Suche dir dein nächstes Backabenteuer aus.</p>
+            </div>
 
-    <div class="hero-stars">✦　✧　⋆　✧　✦　⋆　✧</div>
+            <div class="recipe-tools">
+                <input
+                    type="search"
+                    id="recipe-search"
+                    placeholder="🔎 Guetzli suchen ..."
+                    aria-label="Rezepte suchen"
+                >
+                <div class="filter-buttons">
+                    <button class="filter active" data-filter="alle">Alle</button>
+                    <button class="filter" data-filter="klassiker">Klassiker</button>
+                    <button class="filter" data-filter="schokolade">Schokolade</button>
+                    <button class="filter" data-filter="nuss">Nuss & Co.</button>
+                </div>
+            </div>
 
-    <div class="hero-text">
-        <p class="kleine-zeile">✧ EIN ORT VOLLER WUNDER ✧</p>
-        <h1>Magische<br><em>Weihnachtswelt</em></h1>
-        <p class="hero-beschreibung">
-            Wo Schneeflocken tanzen, Wichtel heimlich arbeiten
-            und hinter jeder Tür ein kleines Wunder wartet.
-        </p>
-        <a href="#dorf" class="gold-button">DIE WELT ENTDECKEN ↓</a>
-        <p class="hero-hinweis">DIE WEIHNACHTSMAGIE BEGINNT HIER</p>
-    </div>
-
-    <div class="hero-bild">
-        <div class="mond">☾</div>
-        <div class="hero-kranz">✧</div>
-        <div class="hero-baum">🎄</div>
-        <div class="hero-geschenk links">🎁</div>
-        <div class="hero-geschenk rechts">🛷</div>
-        <div class="hero-schnee">❄　✦　❄</div>
-    </div>
-
-    <div class="hero-footer">
-        <span>❄ DIE LUFT RIECHT NACH ZIMT UND PLÄTZCHEN</span>
-        <span>SCROLLE HINAUF INS WEIHNACHTSWUNDER ↓</span>
-    </div>
-</header>
-
-
-<!-- WEIHNACHTSDORF -->
-
-<section class="section dorf" id="dorf">
-
-    <div class="abschnitt-label">01 — EIN KLEINES WUNDERLAND</div>
-    <h2>Das <em>Weihnachtsdorf</em></h2>
-    <p class="untertitel">
-        Hinter den schneebedeckten Bergen liegt ein Dorf,
-        in dem Weihnachten das ganze Jahr über ein bisschen weiterlebt.
-    </p>
-
-    <div class="dorf-landschaft">
-
-        <div class="dorf-himmel">☾　✦　⋆　✧　✦</div>
-
-        <div class="berg berg1"></div>
-        <div class="berg berg2"></div>
-
-        <div class="dorf-haeuser">
-
-            <button class="haus haus1" data-house="bäckerei">
-                <span>🏠</span>
-                <small>PLÄTZCHENBÄCKEREI</small>
-            </button>
-
-            <button class="haus haus2" data-house="post">
-                <span>🏡</span>
-                <small>WEIHNACHTSPOST</small>
-            </button>
-
-            <button class="haus haus3" data-house="spielzeug">
-                <span>🏘️</span>
-                <small>SPIELZEUGLADEN</small>
-            </button>
-
-            <button class="haus haus4" data-house="glocke">
-                <span>⛪</span>
-                <small>GLOCKENTURM</small>
-            </button>
-
-        </div>
-
-        <div class="dorf-baum">🎄</div>
-        <div class="dorf-schnee">❄ ❄ ❄ ❄ ❄ ❄ ❄ ❄ ❄</div>
-
-    </div>
-
-    <p class="dorf-tipp">✧ KLICKE AUF EIN HAUS, UM ES ZU BESUCHEN ✧</p>
-    <div id="hausInfo" class="info-box">Wähle ein Haus im Dorf!</div>
-
-</section>
-
-
-<!-- WICHTELWERKSTATT -->
-
-<section class="section werkstatt" id="werkstatt">
-
-    <div class="abschnitt-label">02 — HINTER DEN KULISSEN</div>
-    <h2>Die <em>Wichtelwerkstatt</em></h2>
-    <p class="untertitel">
-        Hier entstehen die schönsten Geschenke der Welt.
-        Aber die Wichtel haben ziemlich viel zu tun!
-    </p>
-
-    <div class="werkstatt-inhalt">
-
-        <div class="werkstatt-bild">
-            <div class="werkstatt-emoji">🧝</div>
-            <div class="werkstatt-tisch">🎁 🧸 🚂 🪆 🎀</div>
-            <div class="werkstatt-funken">✦ ✧ ✦</div>
-        </div>
-
-        <div class="werkstatt-text">
-            <h3>Ein Blick in die Werkstatt</h3>
-            <p>
-                In der Werkstatt wird gehämmert, genäht, gemalt
-                und verpackt. Tausende kleine Helfer sorgen dafür,
-                dass jedes Geschenk etwas Besonderes wird.
+            <div class="recipe-grid" id="recipe-grid"></div>
+            <p class="no-results" id="no-results" hidden>
+                Huch! Dazu habe ich gerade kein Rezept gefunden. 🍪
             </p>
+        </section>
 
-            <div class="aufgaben">
-                <div><span>🧸</span> Spielzeuge bauen</div>
-                <div><span>🎀</span> Geschenke verpacken</div>
-                <div><span>📝</span> Wunschzettel sortieren</div>
-                <div><span>🔔</span> Weihnachtsglocken testen</div>
+        <section class="baking-banner" id="tipps">
+            <div class="banner-icon">🥣</div>
+            <div>
+                <span class="eyebrow">KLEINE BACKGEHEIMNISSE</span>
+                <h2>Das macht Guetzli besonders fein.</h2>
+                <p>
+                    Lies vor dem Start das Rezept einmal ganz durch.
+                    Wiege die Zutaten genau ab und gib dem Teig seine Kühlzeit.
+                    Das macht beim Backen einen grossen Unterschied!
+                </p>
             </div>
+        </section>
 
-            <button class="gold-button" id="wichtelButton">
-                WICHTEL BESUCHEN ✧
-            </button>
-            <p id="wichtelAntwort"></p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ADVENTSKALENDER -->
-
-<section class="section kalender" id="kalender">
-
-    <div class="abschnitt-label">03 — 24 KLEINE ÜBERRASCHUNGEN</div>
-    <h2>Der <em>Adventskalender</em></h2>
-    <p class="untertitel">
-        Hinter jedem Türchen verbirgt sich eine kleine
-        Weihnachtsüberraschung. Welches öffnest du?
-    </p>
-
-    <div class="kalender-grid" id="kalenderGrid"></div>
-    <p class="kalender-hinweis">✧ ÖFFNE DIE TÜRCHEN IN BELIEBIGER REIHENFOLGE ✧</p>
-
-</section>
-
-
-<!-- RENTIER AKADEMIE -->
-
-<section class="section rentier" id="rentier">
-
-    <div class="abschnitt-label">04 — DIE RENTIER-AKADEMIE</div>
-    <h2>Wie gut kennst du <em>Weihnachten?</em></h2>
-
-    <div class="quiz-box">
-        <div class="quiz-tier">🦌</div>
-        <p id="quizFortschritt">FRAGE 1 VON 5</p>
-        <h3 id="quizFrage">Welches Tier zieht traditionell den Weihnachtsschlitten?</h3>
-        <div id="quizAntworten" class="quiz-antworten"></div>
-        <p id="quizRueckmeldung"></p>
-        <button id="quizWeiter" class="gold-button" hidden>WEITER →</button>
-    </div>
-
-</section>
-
-
-<!-- SPIELE -->
-
-<section class="section spiele" id="spiele">
-
-    <div class="abschnitt-label">05 — SPIELEN UND SPASS HABEN</div>
-    <h2>Die <em>Weihnachtsspiele</em></h2>
-    <p class="untertitel">Ein bisschen Weihnachtszauber und eine kleine Herausforderung!</p>
-
-    <div class="spiele-grid">
-
-        <div class="spielkarte">
-            <div class="spiel-symbol">❄️</div>
-            <h3>Schneeflocken-Sammler</h3>
-            <p>Fange so viele Schneeflocken wie möglich in 20 Sekunden!</p>
-            <button class="gold-button" id="schneeSpiel">SPIEL STARTEN</button>
-            <div id="schneeSpielFeld">
-                <p id="schneePunkte">Punkte: 0</p>
-                <p id="schneeZeit">Zeit: 20</p>
-                <div id="schneeZiel"></div>
+        <section class="favorites-section" id="lieblinge">
+            <div class="section-heading">
+                <span class="eyebrow">DEINE SAMMLUNG</span>
+                <h2>Meine Lieblingsguetzli ♡</h2>
+                <p>Hier erscheinen die Rezepte, die du mit dem Herz markierst.</p>
             </div>
-        </div>
+            <div class="recipe-grid" id="favorite-grid"></div>
+            <p id="empty-favorites">Du hast noch keine Favoriten gespeichert. Tippe bei einem Rezept auf ♡!</p>
+        </section>
+    </main>
 
-        <div class="spielkarte">
-            <div class="spiel-symbol">🎁</div>
-            <h3>Das Geschenk-Rätsel</h3>
-            <p>Ein Geschenk ist besonders. Finde heraus, welches es ist!</p>
-            <button class="gold-button" id="geschenkSpiel">RÄTSEL STARTEN</button>
-            <div id="geschenkRaetsel"></div>
-        </div>
+    <footer>
+        <div class="footer-cookie">🍪</div>
+        <p>Guetzli-Atelier</p>
+        <span>Eine kleine Backstube voller Ideen und Krümel.</span>
+        <small>Selbstgemacht mit einer Prise Liebe ✦</small>
+    </footer>
 
+    <div class="modal" id="recipe-modal" aria-hidden="true">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <article class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Schliessen">×</button>
+            <div id="modal-content"></div>
+        </article>
     </div>
 
-</section>
-
-
-<!-- GEHEIMNISWALD -->
-
-<section class="section geheimwald" id="wald">
-
-    <div class="abschnitt-label">06 — EIN GEHEIMNISVOLLER ORT</div>
-    <h2>Der <em>Geheimniswald</em></h2>
-
-    <p class="untertitel">
-        Zwischen uralten Tannen verstecken sich kleine Geheimnisse.
-        Manche sind leicht zu finden. Andere warten auf dich.
-    </p>
-
-    <div class="wald-bild">
-        <div class="wald-baeume">🌲　🌲　🌲　🌲　🌲</div>
-        <div class="wald-mitte">
-            <span>✧</span>
-            <button id="waldGeheimnis">🔔</button>
-            <span>✧</span>
-        </div>
-        <p>FINDE DAS GEHEIMNIS DES WALDES</p>
-    </div>
-
-    <div id="waldAntwort"></div>
-
-</section>
-
-
-<!-- WEIHNACHTSWÜNSCHE -->
-
-<section class="section wuensche">
-
-    <div class="abschnitt-label">07 — EIN WUNSCH FÜR DICH</div>
-    <h2>Dein <em>Weihnachtswunsch</em></h2>
-
-    <p class="untertitel">
-        Manchmal ist ein kleiner Wunsch schon ein grosses Wunder.
-    </p>
-
-    <div class="wunsch-box">
-        <div class="wunsch-stern">⭐</div>
-        <h3>Was wünschst du dir?</h3>
-        <input id="wunschInput" placeholder="Mein Weihnachtswunsch ist ...">
-        <button class="gold-button" id="wunschButton">WUNSCH VERSCHICKEN ✧</button>
-        <p id="wunschAntwort"></p>
-    </div>
-
-</section>
-
-
-<footer>
-    <div class="footer-stern">✧</div>
-    <h2>MAGISCHE WEIHNACHTSWELT</h2>
-    <p>Ein bisschen Zauber steckt in jedem Winter.</p>
-    <div class="footer-links">
-        <a href="#start">STARTSEITE</a>
-        <a href="#dorf">WEIHNACHTSDORF</a>
-        <a href="#kalender">ADVENTSKALENDER</a>
-    </div>
-    <small>MIT GANZ VIEL WEIHNACHTSZAUBER GEMACHT ✧</small>
-</footer>
-
-
-<!-- POPUP -->
-
-<div class="popup" id="popup">
-    <div class="popup-inhalt">
-        <button id="popupSchliessen">✕</button>
-        <div id="popupSymbol">🎄</div>
-        <h2 id="popupTitel">Weihnachtszauber!</h2>
-        <p id="popupText"></p>
-        <button class="gold-button" id="popupOkay">WUNDERBAR!</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
